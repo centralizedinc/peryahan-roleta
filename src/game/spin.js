@@ -1,12 +1,15 @@
 import Phaser from 'phaser'
 import BootScene from './scenes/spin/BootScene'
-import PlayScene from './scenes/spin/PlayScene'
+import MenuScene from './scenes/spin/MenuScene'
+import RoletaScene from './scenes/spin/Roleta'
+import PulaPutiScene from './scenes/spin/PulaPuti'
+import ColorGameScene from './scenes/spin/ColorGame'
 
 function launch() {
     new Phaser.Game({
       type: Phaser.AUTO,
-      width: 400,
-      height: 500,
+      width: 350,
+      height: 550,
       parent: 'game-container',
       physics: {
         default: 'arcade',
@@ -15,7 +18,7 @@ function launch() {
           debug: false
         }
       },
-      scene: [BootScene, PlayScene]
+      scene: [BootScene, RoletaScene, MenuScene, PulaPutiScene, ColorGameScene]
     })
   }
   

@@ -35,9 +35,9 @@ var rounds, degrees, wheel_tween
 var total_amount = 2500
 
 
-export default class PlayScene extends Scene {
+export default class RoletaScene extends Scene {
   constructor () {
-    super({ key: 'PlayScene' })
+    super({ key: 'RoletaScene' })
   }
 
   
@@ -45,16 +45,24 @@ export default class PlayScene extends Scene {
     this.canSpin = true;
     this.hold = false
     this.wheel = this.add.sprite(this.game.config.width / 2, this.game.config.height / 2, "wheel");
-    this.pin = this.add.sprite(this.game.config.width / 2, this.game.config.height / 4, "pin");    
+    this.pin = this.add.sprite(this.game.config.width / 2, this.game.config.height / 3.7, "pin");    
     this.pin.setScale(0.025)
 
     this.spin_coin = this.anims.create({ key: 'coin_animation', frames: this.anims.generateFrameNames('coin'), frameRate:24,  repeat: -1 });
     this.coin = this.add.sprite(30, 30, 'coin').setScale(0.5)
 
     this.total_coins = this.add.text(45, 20, total_amount)
+    this.exit = this.add.text(this.game.renderer.width - 50, 20, 'Exit')
     this.winnings = this.add.text(this.game.config.width / 2, this.game.config.height / 2, "").setOrigin(0.5);
-    this.input.on("pointerup", this.spinWheel, this);
-    this.input.on("pointerdown", this.holdWheel, this);
+    
+    this.wheel.setInteractive()
+    this.wheel.on("pointerup", this.spinWheel, this);
+    this.wheel.on("pointerdown", this.holdWheel, this);
+
+    this.exit.setInteractive();
+    this.exit.on("pointerup", ()=>{
+      this.scene.start('MenuScene')
+    });
 
   //   var tween_winning = this.tweens.add({
   //     targets: [ this.winnings],
